@@ -1,6 +1,6 @@
 import { PI, ABS, RADIANS, DEGREES, SIN, COS, TAN, ASIN, ACOS, ATAN, ATAN2 } from './math.utilities';
-import { J2000_1200, J100, J1970_1200 } from '../../shared/models/constants'
-import { D_HOURS, D_MINUTES, D_MILLI_SECONDS, M_HOUR } from '../../shared/models/constants'
+import { J2000_1200, J100, J1970_1200 } from '@shared/models/constants'
+import { D_HOURS, D_MINUTES, D_MILLI_SECONDS, M_HOUR } from '@shared/models/constants'
 
 export class SunriseSunset {
     //PUBLIC

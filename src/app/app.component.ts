@@ -1,12 +1,11 @@
 import { Component, OnInit, inject } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
 import { DatePipe } from "@angular/common";
-//TODO USE ALIAS
 
-import { PrayerService } from "./shared/services/prayer.service";
+import { PrayerService } from "@shared/services/prayer.service";
 
 @Component({
-  selector: 'app-root',
+  selector: 'tap-app',
   standalone: true,
   imports: [RouterOutlet],
   providers:[DatePipe],

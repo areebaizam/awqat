@@ -1,4 +1,4 @@
-import { MS_DAY, MS_MINUTE } from "../../shared/models/constants";
+import { MS_DAY, MS_MINUTE } from "@shared/models/constants";
 
 export class DateHelper {
 

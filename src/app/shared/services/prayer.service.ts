@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { SunriseSunset, BaseNumbers, SolarParameters, DateHelper, ABS } from "../../core/utilities";
-import { PrayerConfigModel, eHighLatitudeMethod, OffsetSelector, PrayerOffsetModel, eOffsetFactor } from '../models/prayer.model'
-import { ATM_RI_DEG } from '../models/constants';
+import { SunriseSunset, BaseNumbers, SolarParameters, DateHelper, ABS } from "@core/utilities";
+import { PrayerConfigModel, eHighLatitudeMethod, OffsetSelector, PrayerOffsetModel, eOffsetFactor } from '@shared/models/prayer.model'
+import { ATM_RI_DEG } from '@shared/models/constants';
 
 @Injectable({
   providedIn: 'root'
