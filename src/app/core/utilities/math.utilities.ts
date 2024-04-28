@@ -1,5 +1,6 @@
 export const PI = Math.PI;
 export const ABS = (value: number) => Math.abs(value);
+export const FLOOR = (value: number) => Math.floor(value);
 export const RADIANS = (degree: number) => (degree * PI) / 180;
 export const DEGREES = (radian: number) => (radian * 180) / PI;
 export const SIN = (radian: number) => Math.sin(radian);

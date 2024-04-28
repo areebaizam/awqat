@@ -3,12 +3,13 @@ import { RouterOutlet } from "@angular/router";
 import { DatePipe } from "@angular/common";
 
 import { PrayerService } from "@shared/services/prayer.service";
+import { HijriDate } from "@core/utilities/hijrah.utilities";
 
 @Component({
   selector: 'tap-app',
   standalone: true,
   imports: [RouterOutlet],
-  providers:[DatePipe],
+  providers: [DatePipe],
   template: `
     <h1>Welcome to {{title}}!</h1>
     Midnight {{ getLocalTime(prayerService.midnightStart) }}<br />
@@ -36,6 +37,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.prayerService.calculatePrayerTime(this.date);
+    //TODO ADD DATE Validator  16 Nov 2077 2077,11,16
+    console.log('Hijri',HijriDate.getHijriDate(this.date).hLabel);
+    console.log('Greg',HijriDate.getGregorianDate(HijriDate.getHijriDate(this.date)));
   }
 
   //TODO make it private and maybe remove it

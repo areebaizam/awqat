@@ -1,6 +1,7 @@
 import { PI, ABS, RADIANS, DEGREES, SIN, COS, TAN, ASIN, ACOS, ATAN, ATAN2 } from './math.utilities';
-import { J2000_1200, J100, J1970_1200 } from '@shared/models/constants'
-import { D_HOURS, D_MINUTES, D_MILLI_SECONDS, M_HOUR } from '@shared/models/constants'
+import { J2000_1200, J100, J1970_1200 } from '@core/models/constants';
+import { D_HOURS, D_MINUTES, D_MILLI_SECONDS, M_HOUR } from '@shared/models/constants';
+import { BaseNumbers, SolarParameters } from '@shared/models/date.model';
 
 export class SunriseSunset {
     //PUBLIC
@@ -117,13 +118,4 @@ export class SunriseSunset {
     private static calculateHourAngle(solarAngle: number, latitude: number, sunDecl: number,): number {
         return DEGREES(ACOS(COS(RADIANS(solarAngle)) / (COS(RADIANS(latitude)) * COS(RADIANS(sunDecl))) - TAN(RADIANS(latitude)) * TAN(RADIANS(sunDecl))));
     }
-}
-
-export interface BaseNumbers {
-    eqOfTime: number;
-    sunDecl: number;
-}
-export interface SolarParameters extends BaseNumbers {
-    baseMidNight: number;
-    midDayHA: number;
 }
