@@ -22,6 +22,11 @@ export enum eOffsetFactor {
     SUBTRACT = -1,
 }
 
+export enum eMidnightCalcMethod {
+    STD = "Standard",
+    JAF = "Jafari",
+}
+
 enum ePrayerCalcMethod {
     CSTM,
     BCMA,
@@ -106,6 +111,7 @@ export class PrayerCalcMethodModel {
     DhurParams: PrayerOffsetModel;
     MaghribParams: PrayerOffsetModel;
     IshaParams: PrayerOffsetModel;
+    MidnightCalc: eMidnightCalcMethod
     constructor(
         org: string,
         lbl: string,
@@ -114,6 +120,7 @@ export class PrayerCalcMethodModel {
         dp: PrayerOffsetModel,
         mp: PrayerOffsetModel,
         ip: PrayerOffsetModel,
+        mc: eMidnightCalcMethod,
     ) {
         this.Organization = org;
         this.Label = lbl;
@@ -122,6 +129,7 @@ export class PrayerCalcMethodModel {
         this.DhurParams = dp;
         this.MaghribParams = mp;
         this.IshaParams = ip;
+        this.MidnightCalc = mc;
     }
 }
 
@@ -132,10 +140,11 @@ export const PrayerCalcMethodMap: Map<ePrayerCalcMethod, PrayerCalcMethodModel> 
             "BCMA and Sharia Council of B.C.",
             "BCMA Timings (Fajr: 18° / Isha: 15°)",
             { selector: OffsetSelector.DEGREE, value: 18, label: 'before Sunrise', factor: eOffsetFactor.SUBTRACT },
-            { selector: OffsetSelector.DEGREE, value: 4 , label: 'after Sunrise', factor: eOffsetFactor.ADD },
+            { selector: OffsetSelector.DEGREE, value: 4, label: 'after Sunrise', factor: eOffsetFactor.ADD },
             { selector: OffsetSelector.MINUTES, value: 2, label: 'after Zawal', factor: eOffsetFactor.ADD },
             { selector: OffsetSelector.MINUTES, value: 1, label: 'after Sunset', factor: eOffsetFactor.ADD },
             { selector: OffsetSelector.DEGREE, value: 15, label: 'after Sunset', factor: eOffsetFactor.ADD },
+            eMidnightCalcMethod.STD,
         ),
     ],
     [
@@ -144,10 +153,11 @@ export const PrayerCalcMethodMap: Map<ePrayerCalcMethod, PrayerCalcMethodModel> 
             "Egyptian General Authority",
             "Egypt (Fajr: 19.5° / Isha: 17.5°)",
             { selector: OffsetSelector.DEGREE, value: 19.5, label: 'before Sunrise', factor: eOffsetFactor.SUBTRACT },
-            { selector: OffsetSelector.DEGREE, value: 4 , label: 'after Sunrise', factor: eOffsetFactor.SUBTRACT },
+            { selector: OffsetSelector.DEGREE, value: 4, label: 'after Sunrise', factor: eOffsetFactor.SUBTRACT },
             { selector: OffsetSelector.MINUTES, value: 2, label: 'after Zawal', factor: eOffsetFactor.ADD },
             { selector: OffsetSelector.MINUTES, value: 1, label: 'after Sunset', factor: eOffsetFactor.ADD },
             { selector: OffsetSelector.DEGREE, value: 17.5, label: 'after Sunset', factor: eOffsetFactor.ADD },
+            eMidnightCalcMethod.STD,
         ),
     ],
     [
@@ -156,10 +166,11 @@ export const PrayerCalcMethodMap: Map<ePrayerCalcMethod, PrayerCalcMethodModel> 
             "Islamic Society of North America",
             "ISNA (Fajr: 15° / Isha: 15°)",
             { selector: OffsetSelector.DEGREE, value: 15, label: 'before Sunrise', factor: eOffsetFactor.SUBTRACT },
-            { selector: OffsetSelector.DEGREE, value: 4 , label: 'after Sunrise', factor: eOffsetFactor.SUBTRACT },
+            { selector: OffsetSelector.DEGREE, value: 4, label: 'after Sunrise', factor: eOffsetFactor.SUBTRACT },
             { selector: OffsetSelector.MINUTES, value: 2, label: 'after Zawal', factor: eOffsetFactor.ADD },
             { selector: OffsetSelector.MINUTES, value: 1, label: 'after Sunset', factor: eOffsetFactor.ADD },
             { selector: OffsetSelector.DEGREE, value: 15, label: 'after Sunset', factor: eOffsetFactor.ADD },
+            eMidnightCalcMethod.STD,
         ),
     ],
     [
@@ -168,10 +179,11 @@ export const PrayerCalcMethodMap: Map<ePrayerCalcMethod, PrayerCalcMethodModel> 
             "Karachi (University Of Islamic Sciences)",
             "Karachi (Fajr: 18° / Isha: 18°)",
             { selector: OffsetSelector.DEGREE, value: 18, label: 'before Sunrise', factor: eOffsetFactor.SUBTRACT },
-            { selector: OffsetSelector.DEGREE, value: 4 , label: 'after Sunrise', factor: eOffsetFactor.SUBTRACT },
+            { selector: OffsetSelector.DEGREE, value: 4, label: 'after Sunrise', factor: eOffsetFactor.SUBTRACT },
             { selector: OffsetSelector.MINUTES, value: 2, label: 'after Zawal', factor: eOffsetFactor.ADD },
             { selector: OffsetSelector.MINUTES, value: 1, label: 'after Sunset', factor: eOffsetFactor.ADD },
             { selector: OffsetSelector.DEGREE, value: 18, label: 'after Sunset', factor: eOffsetFactor.ADD },
+            eMidnightCalcMethod.STD,
         ),
     ],
     [
@@ -180,10 +192,11 @@ export const PrayerCalcMethodMap: Map<ePrayerCalcMethod, PrayerCalcMethodModel> 
             "Makkah (Umm al-Qura University)",
             "Makkah (Fajr: 18.5° / Isha: Maghrib + 90')",
             { selector: OffsetSelector.DEGREE, value: 18.5, label: 'before Sunrise', factor: eOffsetFactor.SUBTRACT },
-            { selector: OffsetSelector.DEGREE, value: 4 , label: 'after Sunrise', factor: eOffsetFactor.SUBTRACT },
+            { selector: OffsetSelector.DEGREE, value: 4, label: 'after Sunrise', factor: eOffsetFactor.SUBTRACT },
             { selector: OffsetSelector.MINUTES, value: 2, label: 'after Zawal', factor: eOffsetFactor.ADD },
             { selector: OffsetSelector.MINUTES, value: 1, label: 'after Sunset', factor: eOffsetFactor.ADD },
             { selector: OffsetSelector.MINUTES, value: 90 + 1, label: 'after Maghrib', factor: eOffsetFactor.ADD },
+            eMidnightCalcMethod.STD,
         ),
     ],
     [
@@ -192,10 +205,11 @@ export const PrayerCalcMethodMap: Map<ePrayerCalcMethod, PrayerCalcMethodModel> 
             "Makkah (Ramadan Timings)",
             "Makkah-R (Fajr: 18.5° / Isha: Maghrib + 120')",
             { selector: OffsetSelector.DEGREE, value: 18.5, label: 'before Sunrise', factor: eOffsetFactor.SUBTRACT },
-            { selector: OffsetSelector.DEGREE, value: 4 , label: 'after Sunrise', factor: eOffsetFactor.SUBTRACT },
+            { selector: OffsetSelector.DEGREE, value: 4, label: 'after Sunrise', factor: eOffsetFactor.SUBTRACT },
             { selector: OffsetSelector.MINUTES, value: 2, label: 'after Zawal', factor: eOffsetFactor.ADD },
             { selector: OffsetSelector.MINUTES, value: 1, label: 'after Sunset', factor: eOffsetFactor.ADD },
             { selector: OffsetSelector.MINUTES, value: 120 + 1, label: 'after Maghrib', factor: eOffsetFactor.ADD },
+            eMidnightCalcMethod.STD,
         ),
     ],
     [
@@ -204,10 +218,11 @@ export const PrayerCalcMethodMap: Map<ePrayerCalcMethod, PrayerCalcMethodModel> 
             "Muslim World League",
             "MWL (Fajr: 18° / Isha: 17°)",
             { selector: OffsetSelector.DEGREE, value: 18, label: 'before Sunrise', factor: eOffsetFactor.SUBTRACT },
-            { selector: OffsetSelector.DEGREE, value: 4 , label: 'after Sunrise', factor: eOffsetFactor.SUBTRACT },
+            { selector: OffsetSelector.DEGREE, value: 4, label: 'after Sunrise', factor: eOffsetFactor.SUBTRACT },
             { selector: OffsetSelector.MINUTES, value: 2, label: 'after Zawal', factor: eOffsetFactor.ADD },
             { selector: OffsetSelector.MINUTES, value: 1, label: 'after Sunset', factor: eOffsetFactor.ADD },
             { selector: OffsetSelector.DEGREE, value: 17, label: 'after Sunset', factor: eOffsetFactor.ADD },
+            eMidnightCalcMethod.STD,
         ),
     ],
     [
@@ -216,10 +231,11 @@ export const PrayerCalcMethodMap: Map<ePrayerCalcMethod, PrayerCalcMethodModel> 
             "Shia Ithna Ashari",
             "SIA Jaffari (Fajr: 16° / Maghrib: 4° / Isha: 14°)",
             { selector: OffsetSelector.DEGREE, value: 16, label: 'before Sunrise', factor: eOffsetFactor.SUBTRACT },
-            { selector: OffsetSelector.DEGREE, value: 4 , label: 'after Sunrise', factor: eOffsetFactor.SUBTRACT },
+            { selector: OffsetSelector.DEGREE, value: 4, label: 'after Sunrise', factor: eOffsetFactor.SUBTRACT },
             { selector: OffsetSelector.MINUTES, value: 2, label: 'after Zawal', factor: eOffsetFactor.ADD },
             { selector: OffsetSelector.DEGREE, value: 4, label: 'after Sunset', factor: eOffsetFactor.ADD },
             { selector: OffsetSelector.DEGREE, value: 14, label: 'after Sunset', factor: eOffsetFactor.ADD },
+            eMidnightCalcMethod.JAF,
         ),
     ],
     [
@@ -228,10 +244,11 @@ export const PrayerCalcMethodMap: Map<ePrayerCalcMethod, PrayerCalcMethodModel> 
             "Tehran (Institute of Geophysics)",
             "Tahran (Fajr: 17.7° / Maghrib: 4.5° / Isha: 14°)",
             { selector: OffsetSelector.DEGREE, value: 17.7, label: 'before Sunrise', factor: eOffsetFactor.SUBTRACT },
-            { selector: OffsetSelector.DEGREE, value: 4 , label: 'after Sunrise', factor: eOffsetFactor.SUBTRACT },
+            { selector: OffsetSelector.DEGREE, value: 4, label: 'after Sunrise', factor: eOffsetFactor.SUBTRACT },
             { selector: OffsetSelector.MINUTES, value: 2, label: 'after Zawal', factor: eOffsetFactor.ADD },
             { selector: OffsetSelector.DEGREE, value: 4.5, label: 'after Sunset', factor: eOffsetFactor.ADD },
             { selector: OffsetSelector.DEGREE, value: 14, label: 'after Sunset', factor: eOffsetFactor.ADD },
+            eMidnightCalcMethod.JAF,
         ),
     ],
     [
@@ -240,10 +257,11 @@ export const PrayerCalcMethodMap: Map<ePrayerCalcMethod, PrayerCalcMethodModel> 
             "Custom Timings",
             "",
             { selector: OffsetSelector.DEGREE, value: 18, label: 'before Sunrise', factor: eOffsetFactor.SUBTRACT },
-            { selector: OffsetSelector.DEGREE, value: 4 , label: 'after Sunrise', factor: eOffsetFactor.SUBTRACT },
+            { selector: OffsetSelector.DEGREE, value: 4, label: 'after Sunrise', factor: eOffsetFactor.SUBTRACT },
             { selector: OffsetSelector.MINUTES, value: 2, label: 'after Zawal', factor: eOffsetFactor.ADD },
             { selector: OffsetSelector.MINUTES, value: 1, label: 'after Sunset', factor: eOffsetFactor.ADD },
             { selector: OffsetSelector.DEGREE, value: 15, label: 'after Sunset', factor: eOffsetFactor.ADD },
+            eMidnightCalcMethod.STD,
         ),
     ],
 ]);

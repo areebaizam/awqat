@@ -18,11 +18,11 @@ export class SunriseSunset {
         const sunEqOfCtr = this.calculateSunEqOfCtr(julianCentury, geomMeanAnomSun);//L
         const sunTrueLong = geomMeanLongSun + sunEqOfCtr;//M
         const sunTrueAnom = geomMeanAnomSun + sunEqOfCtr;//N
-        const sunVectorRad = this.calculateSunVectorRad(eccentEarthOrbit, sunTrueAnom);//O        
+        // const sunVectorRad = this.calculateSunVectorRad(eccentEarthOrbit, sunTrueAnom);//O   
         const sunAppLong = this.calculateSunAppLong(julianCentury, sunTrueLong,);//P
         const meanObliqEcliptic = this.calculateMeanObliqEcliptic(julianCentury);//Q
         const obliqCorr = this.calculateObliqCorr(julianCentury, meanObliqEcliptic);//R
-        const sunRightAscen = this.calculateSunRightAcsen(sunAppLong, obliqCorr);//S Incorrect
+        // const sunRightAscen = this.calculateSunRightAcsen(sunAppLong, obliqCorr);//S Incorrect
         const sunDecl = this.calculateSunDec(sunAppLong, obliqCorr);//T
         const varY = this.calculateVarY(obliqCorr); //U
         const eqOfTime = this.calculateEqOfTime(geomMeanLongSun, geomMeanAnomSun, eccentEarthOrbit, sunEqOfCtr, varY); //V
@@ -79,9 +79,9 @@ export class SunriseSunset {
             sin3MeanAnom * 0.000289;
     }
 
-    private static calculateSunVectorRad(eccentEarthOrbit: number, sunTrueAnom: number): number {
-        return (1.000001018 * (1 - eccentEarthOrbit * eccentEarthOrbit)) / (1 + eccentEarthOrbit * COS(RADIANS(sunTrueAnom)));
-    }
+    // private static calculateSunVectorRad(eccentEarthOrbit: number, sunTrueAnom: number): number {
+    //     return (1.000001018 * (1 - eccentEarthOrbit * eccentEarthOrbit)) / (1 + eccentEarthOrbit * COS(RADIANS(sunTrueAnom)));
+    // }
 
     private static calculateSunAppLong(julianCentury: number, sunTrueLong: number): number {
         return sunTrueLong - 0.00569 - 0.00478 * SIN(RADIANS(125.04 - 1934.136 * julianCentury));
@@ -95,9 +95,10 @@ export class SunriseSunset {
         return meanObliqEcliptic + 0.00256 * COS(RADIANS(125.04 - 1934.136 * julianCentury));
     }
 
-    private static calculateSunRightAcsen(sunAppLong: number, obliqCorr: number): number {
-        return DEGREES(ATAN2(COS(RADIANS(sunAppLong)), COS(RADIANS(obliqCorr)) * SIN(RADIANS(sunAppLong))));
-    }
+    // private static calculateSunRightAcsen(sunAppLong: number, obliqCorr: number): number {
+    //     return DEGREES(ATAN2(COS(RADIANS(sunAppLong)), COS(RADIANS(obliqCorr)) * SIN(RADIANS(sunAppLong))));
+    // }
+    
     private static calculateSunDec(sunAppLong: number, obliqCorr: number): number {
         return DEGREES(ASIN(SIN(RADIANS(obliqCorr)) * SIN(RADIANS(sunAppLong))))
     }

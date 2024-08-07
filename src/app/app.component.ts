@@ -4,6 +4,7 @@ import { DatePipe } from "@angular/common";
 
 import { PrayerService } from "@shared/services/prayer.service";
 import { HijriDate } from "@core/utilities/hijrah.utilities";
+import { HijriDateModel } from "@shared/models";
 
 @Component({
   selector: 'tap-app',
@@ -12,6 +13,7 @@ import { HijriDate } from "@core/utilities/hijrah.utilities";
   providers: [DatePipe],
   template: `
     <h1>Welcome to {{title}}!</h1>
+    Hijri {{ hDate.hLabel }} <br />
     Midnight {{ getLocalTime(prayerService.midnightStart) }}<br />
     Fajr {{ getLocalTime(prayerService.fajrStart) }}<br />
     Sunrise {{ getLocalTime(prayerService.sunriseStart) }}<br />
@@ -32,14 +34,15 @@ export class AppComponent implements OnInit {
 
   prayerService = inject(PrayerService);
 
+  hDate!:HijriDateModel;
   datePipe = inject(DatePipe);
   date = new Date();
+  
 
   ngOnInit(): void {
     this.prayerService.calculatePrayerTime(this.date);
     //TODO ADD DATE Validator  16 Nov 2077 2077,11,16
-    console.log('Hijri',HijriDate.getHijriDate(this.date).hLabel);
-    console.log('Greg',HijriDate.getGregorianDate(HijriDate.getHijriDate(this.date)));
+    this.hDate = HijriDate.getHijriDate(this.date);
   }
 
   //TODO make it private and maybe remove it

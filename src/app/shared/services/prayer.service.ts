@@ -3,6 +3,7 @@ import { SunriseSunset, DateHelper, ABS } from "@core/utilities";
 import { PrayerConfigModel, eHighLatitudeMethod, OffsetSelector, PrayerOffsetModel, eOffsetFactor } from '@shared/models/prayer.model'
 import { BaseNumbers, SolarParameters } from '@shared/models/date.model';
 import { ATM_RI_DEG } from '@shared/models/constants';
+import { eMidnightCalcMethod } from '../models/prayer.model';
 
 @Injectable({
   providedIn: 'root'
@@ -44,10 +45,13 @@ export class PrayerService {
     // this.sunriseStartNextDay = this.getTimeFromHA(ATM_RI_DEG, eOffsetFactor.SUBTRACT, solarParamsNextDay);
     this.sunsetStartPrevDay = this.getTimeFromHA(ATM_RI_DEG, eOffsetFactor.ADD, solarParamsPrevDay);
     // this.nightPortionNextDay = this.sunriseStartNextDay - this.sunsetStart;
-    this.nightPortion = this.sunriseStart - this.sunsetStartPrevDay;
-    this.midnightStart = this.sunriseStart - this.nightPortion / 2;
-
+    
     this.fajrStart = this.getTimeFromCalcMethod(this.CONFIG.prayerCalcMethod.FajrParams, this.sunriseStart, solarParams);
+    
+    const midnightEnd = this.CONFIG.prayerCalcMethod.MidnightCalc == eMidnightCalcMethod.STD ? this.sunriseStart : this.fajrStart;
+    this.nightPortion = midnightEnd - this.sunsetStartPrevDay;
+    this.midnightStart = midnightEnd - this.nightPortion / 2;
+
     this.ishraqStart = this.getIshraqTime(this.CONFIG.prayerCalcMethod.IshraqParams, solarParams);
     this.dhurStart = this.getTimeFromCalcMethod(this.CONFIG.prayerCalcMethod.DhurParams, this.middayStart, solarParams);
     this.asrStart = this.getAsrTime(solarParams)
